@@ -1,0 +1,171 @@
+/* decorating the month & year page title */
+
+/* decorating the outer <table> box */
+table
+{
+    border: 1px black solid;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+}
+
+/* decorating each cell */
+td
+{
+    height: 100px;
+    width: 10%;
+    border: 1px black solid;
+    text-align: center;
+    font-style: italic;
+    font-weight: bold;
+    position: relative;
+}
+
+/* td:hover
+{
+    background-color: rgb(230, 230, 230);
+} */
+
+#header
+{
+    position: absolute;
+    margin-top: 60px;
+    margin-bottom: 20px;
+    left: 50%;
+    transform: translate(-50%,0);
+}
+
+#month
+{
+    display: inline;
+}
+
+#prev_month_btn, #next_month_btn
+{
+    margin: 10px;
+}
+
+#currentUser
+{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    font-weight: bold;
+}
+
+.button
+{
+    border: 1px black solid;
+    padding: 3px;
+    background-color: rgb(240, 240, 240);
+    border-radius: 2px;
+    display: inline-block;
+}
+
+.button:hover
+{
+    background-color: rgb(209, 209, 209);
+}
+#register, #addEventForm, #tagFilter, #editEventForm
+{
+    padding: 30px;
+    border-radius: 5px;
+    z-index: 99;
+    background-color: rgb(255, 255, 255);
+
+    display: none;
+}
+
+.popUp
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+#background
+{
+    position: absolute;
+    left: 0;
+    top:0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.719);
+    z-index: 1;
+
+    display: none;
+}
+
+#register h2, #addEventForm h2
+{
+    text-align: center;
+}
+
+.close
+{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+#logoutBtn, #addEventBtn1
+{
+    display: none;
+}
+
+.events
+{
+    background-color: rgb(221, 221, 221);
+    font-size: 12pt;
+    border: 1px black solid;
+    margin: 0;
+
+    font-style:normal;
+    font-weight:100;
+}
+
+.dates
+{
+    position: absolute;
+    top: 1px;
+    left: 3px;
+}
+
+.events:hover
+{
+    background-color: beige;
+}
+
+.eventView
+{
+    padding: 30px;
+    border-radius: 5px;
+    z-index: 99;
+    background-color: rgb(255, 255, 255);
+    display: none;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+
+}
+
+.eventView {
+    border:solid 2px black;
+    box-shadow: 2px;
+    background-color: rgba(255, 255, 255, 0.87);
+}
+.times
+{
+    vertical-align: text-top;
+}
+
+.eventEdit, .eventDelete 
+{
+    /* font-size: 7px; */
+    vertical-align: text-bottom;
+}

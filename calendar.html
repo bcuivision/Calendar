@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="calendar.css"/>
+    <title>Module 5 – Calendar View</title>
+</head>
+<body>
+    <form id = "loginform">
+        <label>Username:</label>
+        <input id="username" type="text" placeholder="Username"> 
+        <label>Password:</label>
+        <input id="password" type="password" placeholder="Password"> 
+        <!-- <button id="loginBtn">Log In</button> -->
+        <div class="button" id="loginBtn">Log In</div>
+    </form> 
+    
+    <div class="button" id="registerBtn1">Register</div>
+    <div class="button" id="logoutBtn">Log Out</div>
+    <div class="button" id="addEventBtn1">CREATE +</div>
+    <div class="button" id="filterBtn">Filter</div>
+
+    <div id="register" class="popUp">
+        <h2>REGISTRATION</h2>
+        <form>
+            <label>Username:</label><br>
+            <input id="registerUsername" type="text" placeholder="Username"> <br>
+            <label>Password:</label><br>
+            <input id="registerPassword" type="password" placeholder="Password"> <br>
+
+            <div class="close" id="regClose">x</div>
+            <br>
+            <button id="registerBtn2">Register</button>
+        </form>
+    </div>
+
+    <div id="addEventForm" class="popUp">
+        <h2>ADD EVENT</h2>
+        <label>Title:</label><br>
+        <input id="title" type="text" placeholder="Add title"> <br>
+        
+        <label>Date(YYYY-MM-DD):</label><br>
+        <input id="date" type="date"> <br>
+
+        <label>Time:</label><br>
+        <input id="time" type="time"> <br><br>
+
+        <label>Select Tag:</label><br>
+        <input id="tag" type="radio" name="tags" value="B">Birthdays
+        <input id="tag" type="radio" name="tags" value="S">School
+        <input id="tag" type="radio" name="tags" value="W">Work
+        <input id="tag" type="radio" name="tags" value="P">Personal
+        <br>
+
+        <div class="close" id="addClose">x</div>
+        <br>
+        <button id="addEventBtn2">SAVE</button>
+        <button id="addEventBtn2s">SAVE & SHARE</button>
+    </div>
+
+    <div id="editEventForm" class="popUp">
+        <h2>EDIT EVENT</h2>
+        <label>Title:</label><br>
+        <input id="title" type="text" placeholder="Add title"> <br>
+        
+        <label>Date(YYYY-MM-DD):</label><br>
+        <input id="date" type="date"> <br>
+
+        <label>Time:</label><br>
+        <input id="time" type="time"> <br><br>
+
+        <label>Select Tag:</label><br>
+        <input id="tag" type="radio" name="tags" value="B">Birthdays
+        <input id="tag" type="radio" name="tags" value="S">School
+        <input id="tag" type="radio" name="tags" value="W">Work
+        <input id="tag" type="radio" name="tags" value="P">Personal
+        <br>
+
+        <div class="close" id="editClose">x</div>
+        <br>
+        <button id="editEventBtn2">SAVE</button>
+        <button id="editEventBtn2s">SAVE & SHARE</button>
+    </div>
+
+    <div id="tagFilter" class="popUp">
+        <form>
+            <label for="filter">My Calendars: </label><br>
+            <input id="filter" type="checkbox" name="filters[]" value="P">Personal
+            <input id="filter" type="checkbox" name="filters[]" value="B">Birthdays
+            <input id="filter" type="checkbox" name="filters[]" value="W">Work
+            <input id="filter" type="checkbox" name="filters[]" value="S">School <br><br>
+
+            <label for="filter">Shared Calendars: </label><br>
+            <input id="filter" type="checkbox" name="filters[]" value="SE">Shared Events <br>
+
+            <div class="close" id="filterClose">x</div>
+        <br>
+            <button id="filterBtn2">Apply Filter</button>
+        </form>
+    </div>
+
+
+    <div id="background"></div>
+
+    <div id="currentUser">USERNAME(Log In)</div>
+
+    <br>
+    <!-- javascript will replace the inner text with corresponding month and year  -->
+    <div id="header">
+        <button id="prev_month_btn">PREVIOUS</button>
+        <h1 id="month">MONTH, YEAR</h1>
+        <button id="next_month_btn">NEXT</button>
+    </div>
+
+    <br><br><br><br>
+
+    <!-- below is the html used to create the calendar grid -->
+    <table>
+        <!-- this is the table header, labeling each day -->
+        <tr id="days">
+            <th>SUN</th>
+            <th>MON</th>
+            <th>TUE</th>
+            <th>WED</th>
+            <th>THU</th>
+            <th>FRI</th>
+            <th>SAT</th>
+        </tr>
+
+        <!-- the of the following 5 <tr> tags represent a week in the calendar-->
+        <tr id="weekOne" class="weeks">
+            <td class="sun"></td>
+            <td class="mon"></td>
+            <td class="tue"></td>
+            <td class="wed"></td>
+            <td class="thu"></td>
+            <td class="fri"></td>
+            <td class="sat"></td>
+        </tr>
+
+        <tr id="weekTwo" class="weeks">
+            <td class="sun"></td>
+            <td class="mon"></td>
+            <td class="tue"></td>
+            <td class="wed"></td>
+            <td class="thu"></td>
+            <td class="fri"></td>
+            <td class="sat"></td>
+        </tr>
+
+        <tr id="weekThree" class="weeks">
+            <td class="sun"></td>
+            <td class="mon"></td>
+            <td class="tue"></td>
+            <td class="wed"></td>
+            <td class="thu"></td>
+            <td class="fri"></td>
+            <td class="sat"></td>
+        </tr>
+
+        <tr id="weekFour" class="weeks">
+            <td class="sun"></td>
+            <td class="mon"></td>
+            <td class="tue"></td>
+            <td class="wed"></td>
+            <td class="thu"></td>
+            <td class="fri"></td>
+            <td class="sat"></td>
+        </tr>
+
+        <tr id="weekFive" class="weeks">
+            <td class="sun"></td>
+            <td class="mon"></td>
+            <td class="tue"></td>
+            <td class="wed"></td>
+            <td class="thu"></td>
+            <td class="fri"></td>
+            <td class="sat"></td>
+        </tr>
+    </table>
+
+    <footer>
+        <script src="calendar.js"></script>
+        <!-- <script src="ajax.js"></script> -->
+
+        <script>
+            document.getElementById("loginBtn").addEventListener("click", loginAjax, false);
+
+            let currentUser = document.getElementById("currentUser");
+
+            // update info if page refreshed
+            if(sessionStorage.getItem('username'))
+            {
+                //enable logout, create event, filter
+                document.getElementById("logoutBtn").style.display = "inline-block";
+                document.getElementById("logoutBtn").addEventListener("click", logoutAjax, false);
+
+                let addBtn = document.getElementById("addEventBtn1");
+                addBtn.style.display="inline-block";
+                addBtn.addEventListener("click", openAddForm, false);
+
+                let displayTags = document.getElementById("filterBtn");
+                displayTags.style.display="inline-block";
+                displayTags.addEventListener("click", openTagOptions, false);
+                
+                //hide log in button and register button on the html
+                document.getElementById("loginform").style.display = "none";
+                document.getElementById("registerBtn1").style.display = "none";
+                
+
+                currentUser.innerHTML = sessionStorage.getItem('username');
+                loadUserEvents()
+            }
+                
+            //User Registration Functionalities
+            let registrationForm = document.getElementById("register");
+            let background = document.getElementById("background");
+            let regCloseBtn = document.getElementById("regClose");
+
+            document.getElementById("registerBtn1").addEventListener("click",openForm,false);
+            document.getElementById("registerBtn2").addEventListener("click",submitForm,false);
+            regCloseBtn.addEventListener("click",closeForm,false);
+
+            //fetch to login.php
+            function loginAjax(event) 
+            {
+                event.preventDefault();
+                console.log("Login Clicked!");
+
+                const username = document.getElementById("username").value; // Get the username from the form
+                const password = document.getElementById("password").value; // Get the password from the form
+
+                // Make a URL-encoded string for passing POST data:
+                const data = { "username": username, "password": password };
+
+                console.log(JSON.stringify(data));
+
+                fetch("login.php", {
+                        method: 'POST',
+                        body: JSON.stringify(data),
+                        headers: { 'content-type': 'application/json'}
+                    })
+                    .then(response => response.json())
+                    
+                    .then(data => {
+                        console.log(data);
+                        if(data.success)
+                        {
+                            alert("You've been logged in!");
+
+                            //*** store token in JS ***
+                            sessionStorage.setItem('username',  username);
+                            sessionStorage.setItem('token', data.token)
+
+                            //display current user on the calendar
+                            currentUser.innerText = username;
+
+                            //display relevant events
+                            loadUserEvents();
+
+                            //display log out button on the html
+                            var logOut = document.getElementById("logoutBtn");
+                            logOut.style.display = "inline-block";
+                            logOut.addEventListener("click", logoutAjax, false);
+
+                            let addBtn = document.getElementById("addEventBtn1");
+                            addBtn.style.display="inline-block";
+                            addBtn.addEventListener("click", openAddForm, false);
+
+                            //hide log in button and register button on the html
+                            document.getElementById("loginform").style.display = "none";
+                            document.getElementById("registerBtn1").style.display = "none";
+                            console.log("hide buttons after log in");
+
+                            //display filter by tags option on the html
+                            let displayTags = document.getElementById("filterBtn");
+                            displayTags.style.display="inline-block";
+                            displayTags.addEventListener("click", openTagOptions, false);
+
+                            //*** load this user's events to calendar.html ***
+                            // loadUserEvents();
+
+                        }
+                        else
+                        {
+                            //alert user that login failed
+                            alert("FAILED LOGIN | " + data.message);
+                        }
+
+                        //clear login entries
+                        document.getElementById("username").value = "";
+                        document.getElementById("password").value = "";
+                    })
+                    .catch(err => console.error(err));
+            }
+
+            //load user events to screen
+            function loadUserEvents()
+            {
+                console.log("Loading User Events to the calendar.");
+
+                const username = sessionStorage.getItem('username');
+                const token = sessionStorage.getItem('token');
+
+                // Make a URL-encoded string for passing POST data:
+                const data = { "username": username, "token": token };
+
+                console.log(JSON.stringify(data));
+
+                fetch("load.php", {
+                        method: 'POST',
+                        body: JSON.stringify(data),
+                        headers: { 'content-type': 'application/json'}
+                    })
+                    // .then(res=>res.text())
+                    // .then(data => console.log(data))
+                    .then(response => response.json())
+                    
+                    .then(data => {
+                        if(data.success)
+                        {
+                            console.log("Events successfullly loaded");
+                            console.log(data);
+                            console.log(data.events);
+
+                            var i = 0;
+
+                            //display events on calendar
+                           while(i != data.events.length)
+                            {
+                                let event = data.events[i];
+                                console.log(event);
+                                //get the corresponding table cell by id
+                                var eventDOM = document.getElementById(event.date);
+
+                                console.log(eventDOM);
+
+                                //create events
+                                let eventElement = document.createElement("div");
+                                eventElement.classList.add("events");
+                                let titleText = document.createTextNode(event.title);
+                                //add event listeners
+                                eventElement.addEventListener("click", openEvent,false);
+                                eventElement.appendChild(titleText);
+                                eventDOM.appendChild(eventElement);
+
+                                //create detailed event view
+                                let viewElement = document.createElement("div");
+                                viewElement.classList.add("eventView");
+
+                                let timeElement = document.createElement("div");
+                                timeElement.classList.add("times");
+                                timeElement.innerText = "Time: " + event.time;
+                                viewElement.appendChild(timeElement);
+
+                                let eventCloseElement = document.createElement("div");
+                                eventCloseElement.innerText = "x";
+                                eventCloseElement.classList.add("close");
+                                viewElement.appendChild(eventCloseElement);
+                                background.style.display="none";
+                                eventCloseElement.addEventListener("click", closeEvent,false);
+
+                                let eventDelete = document.createElement("div");
+                                eventDelete.innerText = "Delete";
+                                eventDelete.classList.add("eventDelete");
+                                viewElement.appendChild(eventDelete);
+                                // background.style.display="none";
+                                eventDelete.addEventListener("click", eventdelete,false);
+
+                                let eventEdit = document.createElement("div");
+                                eventEdit.innerText = "Edit";
+                                eventEdit.classList.add("eventEdit");
+                                viewElement.appendChild(eventEdit);
+                                // background.style.display="none";
+                                eventEdit.addEventListener("click", eventedit,false);
+
+
+                               
+
+                                eventElement.appendChild(viewElement);
+
+                                //**add delete
+                                //event id , username, token
+
+                                //edit options
+                                //event_id, title, date, time
+
+                                i = i+1;
+                            }
+                        }
+                        else
+                        {
+                            //alert user event load has failed
+                            alert("FAILED LOAD | " + data.message);
+                        }
+                    })
+                    .catch(err => console.error(err));
+            }
+
+            let tempEventView = null;
+
+            //Open detailed view of event on calendar
+            function openEvent(event)
+            {
+                event.preventDefault();
+                console.log("Opening Event");
+                console.log(event.target);
+                // background.style.display="block";
+                event.target.children[0].style.display="block";
+                tempEventView = event.target.children[0];
+            }
+
+            //close detailed view of event
+            function closeEvent(event)
+            {
+                event.preventDefault();
+                console.log("Closing Event");
+                // background.style.display="none";
+                tempEventView.style.display="none";
+            }
+            
+
+            //edit event
+            function eventedit(event)
+            {
+                event.preventDefault();
+                console.log("Event Form Opened");
+                console.log(event.target);
+                background.style.display = "block";
+                document.getElementById("editEventForm").style.display="block";
+                editForm.style.display = "block";
+                
+            }
+
+            let editCloseBtn = document.getElementById("editClose");
+            addCloseBtn.addEventListener("click",editCloseForm,false);
+
+            document.getElementById("editEventBtn").addEventListener("click", submitEditForm, false);
+
+
+            function submitAddForm()
+            {
+                console.log("Edit Event Form Submitted");
+
+                //add event to sql by fetching to addEvent.php
+                editEventAjax(event);
+
+                //close add event form
+                editCloseForm();
+                
+            }
+
+            //close add event form
+            function editCloseForm()
+            {
+                editForm.style.display = "none";
+                background.style.display = "none";
+
+                // clear edit form entries
+                document.getElementById("title").value = "";
+                document.getElementById("date").value = "";
+                document.getElementById("time").value = "";
+            }
+
+            //fetch to addEvent.php
+            function editEventAjax(event)
+            {
+                event.preventDefault();
+                console.log("Starting Edit Event AJAX");
+
+                //retrieving event data from form
+                const title = document.getElementById("title").value;
+                const date = document.getElementById("date").value;
+                const time = document.getElementById("time").value;
+                const username = sessionStorage.getItem('username');
+                // const username = currentUser.innerText;
+                const tags = document.querySelector('input[name="tags"]:checked').value;
+
+                // Make a URL-encoded string for passing POST data:
+                const data = { "username": username, "title": title, "date": date, "time": time, "tags": tags};
+
+                console.log(JSON.stringify(data));
+
+                fetch("editEvent.php", {
+                        method: 'POST',
+                        body: JSON.stringify(data),
+                        headers: { 'content-type': 'application/json'}
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data)
+
+                        if(data.success)
+                        {
+                            //display successful add event message 
+                            alert("You have successfully edited the event!" );
+                        }
+                        else
+                        {
+                            alert("EDIT FAILED | " + data.message);
+                        }
+
+                        // clear add form entries
+                        document.getElementById("title").value = "";
+                        document.getElementById("date").value = "";
+                        document.getElementById("time").value = "";
+                        document.querySelector('input[name="tags"]:checked').checked = false;
+                    })
+                    .catch(err => console.error(err));
+
+            }
+
+            //delete event
+            function eventdelete(event)
+            {
+                event.preventDefault();
+                console.log("Delete Event Form Opened");
+                console.log(event.target);
+
+                const username = sessionStorage.getItem('username');
+
+
+                // Make a URL-encoded string for passing POST data:
+                const data = { "username": username, };
+
+                console.log(JSON.stringify(data));
+
+                fetch("deleteEvent.php", {
+                        method: 'POST',
+                        body: JSON.stringify(data),
+                        headers: { 'content-type': 'application/json'}
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data)
+
+                        if(data.success)
+                        {
+                            //display successful add event message 
+                            alert("You have successfully deleted the event!" );
+                        }
+                        else
+                        {
+                            alert("EDIT FAILED | " + data.message);
+                        }
+
+                    })
+                    .catch(err => console.error(err));
+
+                
+            }
+
+
+
+            //fetch to logout.php
+            function logoutAjax(event)
+            {
+                event.preventDefault();
+                console.log("Logging Out right now.");
+                //fetch php to destroy session
+                fetch("logout.php", {
+                    method: 'POST',
+                    headers: { 'content-type': 'application/json' }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    
+                    //retrieve JSON from php to confirm that we clear front end JS token
+                    if(data.success)
+                    {
+                        //*** clear JS token ***
+                        alert("You've been logged out!");
+                        sessionStorage.clear();
+                        currentUser.innerText = "USERNAME";
+
+                        
+
+                        //remove log out button
+                        document.getElementById("logoutBtn").style.display = "none";
+                        let addBtn = document.getElementById("addEventBtn1");
+                        addBtn.style.display="none";
+
+                        //display log in button and register button on the html
+                        document.getElementById("loginform").style.display = "block";
+                        document.getElementById("registerBtn1").style.display = "inline-block";
+                    }
+                    else
+                    {
+                        //alert user that login failed
+                        alert("FAILED LOGIN | " + data.message);
+                    }
+                })
+                .catch(err => console.error(err));
+            }
+
+            //make user registration form visible
+            function openForm()
+            {
+                console.log("User Registration Form Opened");
+                registrationForm.style.display = "block";
+                background.style.display = "block";
+            }
+
+            //register new user
+            function submitForm()
+            {
+                console.log("User Registration Form Submitted");
+
+                //register user in sql by fetching to register.php
+                registerAjax(event);
+
+                //close user registration form
+                closeForm();
+            }
+
+            //close user registration form
+            function closeForm()
+            {
+                registrationForm.style.display = "none";
+                background.style.display = "none";
+            }
+
+            //fetch to register.php
+            function registerAjax(event)
+            {
+                event.preventDefault();
+                console.log("Starting Register AJAX");
+                const username = document.getElementById("registerUsername").value; 
+                const password = document.getElementById("registerPassword").value; 
+
+                // Make a URL-encoded string for passing POST data:
+                const data = { "username": username, "password": password };
+                console.log(JSON.stringify(data));
+
+                fetch("register.php", {
+                        method: 'POST',
+                        body: JSON.stringify(data),
+                        headers: { 'content-type': 'application/json'}
+                    })
+                    .then(response => response.json())
+
+                    .then(data => {
+                        console.log(data)
+
+                        if(data.success)
+                        {
+                            //display successful registration message 
+                            alert("You have successfully registered new user - Log in now!" );
+                        }
+                        else
+                        {
+                            alert("REGISTER FAILED | " + data.message);
+                        }
+
+                        // clear register entries
+                        document.getElementById("registerUsername").value = "";
+                        document.getElementById("registerPassword").value = "";
+                    })
+                    .catch(err => console.error(err));
+
+            }
+
+            //add event input form DOM
+            let addForm = document.getElementById("addEventForm");
+
+            let addCloseBtn = document.getElementById("addClose");
+            addCloseBtn.addEventListener("click",addCloseForm,false);
+
+            document.getElementById("addEventBtn2").addEventListener("click",submitAddForm,false);
+
+            //open add event form
+            function openAddForm()
+            {
+                console.log("Add Event Form Opened");
+                addForm.style.display = "block";
+                background.style.display = "block";
+            }
+
+            //submit add form and add event to SQL by calling AJAX
+            function submitAddForm()
+            {
+                console.log("Add Event Form Submitted");
+
+                //add event to sql by fetching to addEvent.php
+                addEventAjax(event);
+
+                //close add event form
+                addCloseForm();
+                
+            }
+
+            //close add event form
+            function addCloseForm()
+            {
+                addForm.style.display = "none";
+                background.style.display = "none";
+
+                // clear add form entries
+                document.getElementById("title").value = "";
+                document.getElementById("date").value = "";
+                document.getElementById("time").value = "";
+            }
+
+            //fetch to addEvent.php
+            function addEventAjax(event)
+            {
+                event.preventDefault();
+                console.log("Starting Add Event AJAX");
+
+                //retrieving event data from form
+                const title = document.getElementById("title").value;
+                const date = document.getElementById("date").value;
+                const time = document.getElementById("time").value;
+                const username = sessionStorage.getItem('username');
+                // const username = currentUser.innerText;
+                const tags = document.querySelector('input[name="tags"]:checked').value;
+
+                // Make a URL-encoded string for passing POST data:
+                const data = { "username": username, "title": title, "date": date, "time": time};
+
+                console.log(JSON.stringify(data));
+
+                fetch("addEvent.php", {
+                        method: 'POST',
+                        body: JSON.stringify(data),
+                        headers: { 'content-type': 'application/json'}
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data)
+
+                        if(data.success)
+                        {
+                            //display successful add event message 
+                            alert("You have successfully created a new event!" );
+                        }
+                        else
+                        {
+                            alert("REGISTER FAILED | " + data.message);
+                        }
+
+                        // clear add form entries
+                        document.getElementById("title").value = "";
+                        document.getElementById("date").value = "";
+                        document.getElementById("time").value = "";
+                        document.querySelector('input[name="tags"]:checked').checked = false;
+                    })
+                    .catch(err => console.error(err));
+
+            }
+
+            let filter = document.getElementById("tagFilter");
+
+            let filterCloseBtn = document.getElementById("filterClose");
+            filterCloseBtn.addEventListener("click", closeFilter,false);
+
+            document.getElementById("filterBtn2").addEventListener("click", applyFilter, false);
+
+            function openTagOptions()
+            {
+                console.log("Filter Box Opened");
+                filter.style.display = "block";
+                background.style.display = "block";
+            }
+
+            function applyFilter() 
+            {
+                console.log("Filter Selection Applied");
+
+                applyFilterAjax(event);
+
+                closeFilter();
+            }
+
+            function closeFilter()
+            {
+                document.getElementById("tagFilter").style.display = "none";
+                background.style.display = "none";   
+                console.log("closing filter popup");
+            }
+
+            function applyFilterAjax(event)
+            {
+                event.preventDefault();
+                console.log("Starting Apply Filter AJAX");
+
+                //retrieving event data from form
+                const username = currentUser.innerText;
+                
+                //referenced: https://stackoverflow.com/questions/9493531/send-multiple-checkbox-data-to-php-via-jquery-ajax
+                var selectedFilters = new Array();
+                $('input[name="filters[]"]:checked').each(function() {
+                data['filters[]'].push($(this).val());
+                });
+
+                selectedFilters = data['filters[]'].push($(this).val());
+
+                const tags = document.querySelector('input[name="tags"]:checked').value;
+
+                // Make a URL-encoded string for passing POST data:
+                const data = { "username": username, "tags":selectedFilters};
+
+                console.log(JSON.stringify(data));
+
+                fetch("filterEvent.php", {
+                        method: 'POST',
+                        body: JSON.stringify(data),
+                        headers: { 'content-type': 'application/json'}
+                    })
+                    // .then(res => res.text())
+                    // .then(text => console.log(text))
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data)
+
+                        if(data.success)
+                        {
+                            //display successful add event message 
+                            alert("Filter applied successfully!" );
+                        }
+                        else
+                        {
+                            alert("FILTER EVENT FAILED | " + data.message);
+                        }
+                    
+                     }    
+                        
+                    ) .catch(err => console.error(err));
+            }
+
+
+        </script>
+    </footer>
+
+</body>
+</html>
